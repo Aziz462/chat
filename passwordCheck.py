@@ -34,16 +34,6 @@ def check_password(z):
         else:
             if not numbersf:
                 return 'В пароле отсутствуют цифры, попробуйте ещё раз'
-            else:
-                for j in range(0, len(z) - 2):
-                    if z[j:j + 3].lower() in en_1 or \
-                       z[j:j + 3].lower() in en_2 or \
-                       z[j:j + 3].lower() in en_3:
-                        return 'В пароле подряд идущие символы, попробуйте ещё раз'
-                    if z[j:j + 3].lower() in r_1 or \
-                       z[j:j + 3].lower() in r_2 or \
-                       z[j:j + 3].lower() in r_3:
-                        return 'В пароле подряд идущие символы, попробуйте ещё раз'
-                return 'ok'
+        return 'ok'
 
 
