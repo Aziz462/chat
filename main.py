@@ -82,7 +82,7 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
         URL = self.userDict[self.userList.currentItem().text()]
         sender = self.username
         receiver = self.userList.currentItem().text()
-        timenow = datetime.datetime.now().strftime("%H:%M")
+        timenow = datetime.datetime.now().strftime("%H:%M:%S")
         text = self.msg_txt.text()
         command = f"""INSERT INTO messages VALUES("{sender}", "{receiver}", "{timenow}", "{text}")"""
         self.cur.execute(command)
@@ -110,9 +110,9 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
         messageList = self.cur.execute(command).fetchall()
         messageList += self.cur.execute(command1).fetchall()
         self.label.setText(F'Переписка с {self.other_user}')
-        messageList.sort(key=lambda x: x[2], reverse=True)
+        messageList.sort(key=lambda x: x[1], reverse=True)
         for message in messageList:
-            self.messages.addItem(str(message[1]) + ' - ' + str(message[2]) + ' - ' + str(message[0]))
+            self.messages.addItem(str(message[1][:-3]) + ' - ' + str(message[2]) + ' - ' + str(message[0]))
 
     def sign_out(self): 
         """Осуществляет выход из аккаунта"""
