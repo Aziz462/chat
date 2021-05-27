@@ -13,6 +13,7 @@ class sign_up_window(QDialog, LogInSignUpDialog):
         QDialog.__init__(self)
         self.mainwindow = mainwindow
         self.setupUi(self)
+        self.setWindowTitle("Регистрация")
         self.con = sqlite3.connect("logs.sqlite")
         self.mainwindow.account_created = False
         self.buttonBox.accepted.connect(self.create_user)
@@ -33,7 +34,6 @@ class sign_up_window(QDialog, LogInSignUpDialog):
         if passcheckresult != 'ok':
             self.mainwindow.error.setText(passcheckresult)
             return
-        print(passcheckresult)
         command = f"""INSERT INTO userdata VALUES ('{name}', '{password}')"""
         self.con.cursor().execute(command)
         self.con.commit()

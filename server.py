@@ -20,7 +20,6 @@ def start_server():
         data = request.json
         con = sqlite3.connect("logs.sqlite") 
         cur = con.cursor() 
-        print(data)
         
         cur.execute(f"""INSERT INTO messages VALUES("{data['sender']}", "{data['receiver']}", "{data['time']}", "{data['text']}" )""")
         con.commit()

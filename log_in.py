@@ -15,6 +15,7 @@ class log_in_window(QDialog, LogInSignUpDialog):
         QDialog.__init__(self)
         self.mainwindow = mainwindow
         self.setupUi(self)
+        self.setWindowTitle("Вход")
         self.con = sqlite3.connect("logs.sqlite")
         self.buttonBox.accepted.connect(self.log_in)
 
@@ -24,11 +25,8 @@ class log_in_window(QDialog, LogInSignUpDialog):
     def log_in(self):
         command = """SELECT * FROM userdata"""
         userdata = self.con.cursor().execute(command).fetchall()
-        print(userdata)
         self.user_found = False
         for name_password in userdata:
-            print(self.password.text())
-            print(self.name.text())
             if self.name.text() == name_password[0] and self.password.text() == name_password[1]:
                 self.user_found = True
                 break

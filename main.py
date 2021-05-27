@@ -37,6 +37,8 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
             self.sign_up_btn
         ]
         
+        self.setWindowTitle("Чаты")
+
         self.tunnel = create_tunnel() # создание ngrok туннеля
         self.ngrok_link.setText(self.tunnel.public_url)
 
@@ -107,7 +109,6 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
         self.messages.clear()
         messageList = self.cur.execute(command).fetchall()
         messageList += self.cur.execute(command1).fetchall()
-        print(messageList)
         self.label.setText(F'Переписка с {self.other_user}')
         messageList.sort(key=lambda x: x[2], reverse=True)
         for message in messageList:
