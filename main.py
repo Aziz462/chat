@@ -82,7 +82,7 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
         URL = self.userDict[self.userList.currentItem().text()]
         sender = self.username
         receiver = self.userList.currentItem().text()
-        timenow = datetime.datetime.now().strftime("%H:%M:%S")
+        timenow = datetime.datetime.now().strftime("%H:%M")
         text = self.msg_txt.text()
         command = f"""INSERT INTO messages VALUES("{sender}", "{receiver}", "{timenow}", "{text}")"""
         self.cur.execute(command)
