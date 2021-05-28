@@ -110,9 +110,13 @@ class Chat_widget(QMainWindow, Ui_MainWindow):
         messageList = self.cur.execute(command).fetchall()
         messageList += self.cur.execute(command1).fetchall()
         self.label.setText(F'Переписка с {self.other_user}')
-        messageList.sort(key=lambda x: x[1], reverse=True)
+        messageList.sort(key=self.sort_func)
         for message in messageList:
             self.messages.addItem(str(message[1][:-3]) + ' - ' + str(message[2]) + ' - ' + str(message[0]))
+
+    def sort_func(self, i):
+        """Вспомогательная функция для сортировки сообщений"""
+        return i[1]
 
     def sign_out(self): 
         """Осуществляет выход из аккаунта"""
